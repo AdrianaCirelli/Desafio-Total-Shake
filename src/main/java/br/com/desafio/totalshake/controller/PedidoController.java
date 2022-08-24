@@ -19,6 +19,11 @@ public class PedidoController {
     @Autowired
     private PedidoService service;
 
+    @GetMapping(value = "/findAll")
+    public ResponseEntity<String> findAll(){
+        return ResponseEntity.ok().body("olá, deu certo!");
+    }
+
     @GetMapping(value = "/{id}")
     public ResponseEntity<PedidoDto> findById (@PathVariable Long id) {
        PedidoDto dto = service.findById(id);

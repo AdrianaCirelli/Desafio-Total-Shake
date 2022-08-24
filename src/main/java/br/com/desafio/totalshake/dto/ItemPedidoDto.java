@@ -2,7 +2,6 @@ package br.com.desafio.totalshake.dto;
 
 import br.com.desafio.totalshake.model.ItemPedido;
 import br.com.desafio.totalshake.model.Pedido;
-
 import javax.validation.constraints.NotBlank;
 
 
