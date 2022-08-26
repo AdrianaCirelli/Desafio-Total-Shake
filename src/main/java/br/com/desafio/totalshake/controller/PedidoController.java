@@ -7,18 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-
 import java.net.URI;
 
 @RestController
 @RequestMapping(value = "/pedidos")
 public class PedidoController {
 
-
     @Autowired
     private PedidoService service;
-
     @GetMapping(value = "/findAll")
     public ResponseEntity<String> findAll(){
         return ResponseEntity.ok().body("olá, deu certo!");
@@ -29,14 +25,11 @@ public class PedidoController {
        PedidoDto dto = service.findById(id);
         return ResponseEntity.ok().body(dto);
     }
-
     @PostMapping
     public ResponseEntity<PedidoDto> insert ( @RequestBody PedidoDto dto){
         dto = service.insert(dto);
-
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(dto.getId()).toUri();
-
         return ResponseEntity.created(uri).body(dto);
     }
 

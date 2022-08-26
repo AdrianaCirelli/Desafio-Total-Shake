@@ -21,11 +21,9 @@ public class PedidoDto {
     private LocalDateTime dataHora;
     @NotBlank
     private Status status;
-
     public void PedidoDto(){
 
     }
-
     public PedidoDto(Long id, LocalDateTime dataHora, Status status) {
         this.id = id;
         this.dataHora = dataHora;
