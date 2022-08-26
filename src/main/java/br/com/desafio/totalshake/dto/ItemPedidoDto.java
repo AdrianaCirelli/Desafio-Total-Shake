@@ -8,6 +8,7 @@ import javax.validation.constraints.NotBlank;
 public class ItemPedidoDto {
     private Pedido pedido;
     private Long id;
+
     @NotBlank
     private Integer quantidade;
     @NotBlank

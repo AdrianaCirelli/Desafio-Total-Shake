@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -19,9 +21,15 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDateTime dataHora;
+
     private Status status;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "pedido")
     private List<ItemPedido> itensPedidoList = new java.util.ArrayList<>();
+
+    @PrePersist
+    void prePersist(){
+        this.dataHora = LocalDateTime.now();
+    }
 
     //necessário para o hibernate identificar a classe
     @Deprecated
