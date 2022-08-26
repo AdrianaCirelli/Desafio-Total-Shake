@@ -32,8 +32,7 @@ public class PedidoService {
     @Transactional
     public PedidoDto insert(PedidoDto dto) {
         Pedido entity = new Pedido();
-        entity = repository.save(entity);
-
+        entity = repository.save(Pedido.convert(dto));
         return new PedidoDto(entity);
     }
 

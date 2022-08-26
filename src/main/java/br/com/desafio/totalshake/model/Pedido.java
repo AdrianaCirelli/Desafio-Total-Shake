@@ -1,6 +1,7 @@
 package br.com.desafio.totalshake.model;
 
 
+import br.com.desafio.totalshake.dto.PedidoDto;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,7 +22,7 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDateTime dataHora;
-
+    @Enumerated (EnumType.STRING)
     private Status status;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "pedido")
     private List<ItemPedido> itensPedidoList = new java.util.ArrayList<>();
@@ -29,6 +30,13 @@ public class Pedido {
     @PrePersist
     void prePersist(){
         this.dataHora = LocalDateTime.now();
+    }
+
+
+    public static Pedido convert(PedidoDto pedidoDto){
+        Pedido pedido = new Pedido();
+        pedido.setStatus(pedidoDto.getStatus());
+        return pedido;
     }
 
     //necessário para o hibernate identificar a classe
