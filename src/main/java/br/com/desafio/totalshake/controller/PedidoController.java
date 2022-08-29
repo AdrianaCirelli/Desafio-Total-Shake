@@ -17,6 +17,7 @@ public class PedidoController {
     private PedidoService service;
     @GetMapping(value = "/findAll")
     public ResponseEntity<String> findAll(){
+
         return ResponseEntity.ok().body("olá, deu certo!");
     }
 

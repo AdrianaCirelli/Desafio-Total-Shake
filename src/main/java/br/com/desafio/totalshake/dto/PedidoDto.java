@@ -20,11 +20,6 @@ public class PedidoDto {
     public void PedidoDto(){
 
     }
-    public PedidoDto(Long id,  Status status) {
-        this.id = id;
-        this.status = status;
-    }
-
     public PedidoDto (Pedido entity) {
         this.id = entity.getId();
         this.dataHora= entity.getDataHora();
