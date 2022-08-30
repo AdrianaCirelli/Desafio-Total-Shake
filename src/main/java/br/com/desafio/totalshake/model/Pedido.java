@@ -1,10 +1,9 @@
 package br.com.desafio.totalshake.model;
 
 
-import br.com.desafio.totalshake.dto.PedidoDto;
+import br.com.desafio.totalshake.dtoResponse.PedidoDtoResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -23,7 +22,7 @@ public class Pedido {
     private LocalDateTime dataHora;
     @Enumerated (EnumType.STRING)
     private Status status;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "pedido")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "pedido", cascade = CascadeType.ALL)
     private List<ItemPedido> itensPedidoList = new java.util.ArrayList<>();
 
     @PrePersist
@@ -32,7 +31,7 @@ public class Pedido {
     }
 
 
-    public static Pedido convert(PedidoDto pedidoDto){
+    public static Pedido convert(PedidoDtoResponse pedidoDto){
         Pedido pedido = new Pedido();
         pedido.setStatus(pedidoDto.getStatus());
         return pedido;

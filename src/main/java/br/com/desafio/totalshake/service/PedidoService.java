@@ -1,7 +1,7 @@
 package br.com.desafio.totalshake.service;
 
-import br.com.desafio.totalshake.dto.PedidoDto;
-import br.com.desafio.totalshake.form.AtualizacaoPedidoForm;
+import br.com.desafio.totalshake.dtoResponse.PedidoDtoResponse;
+import br.com.desafio.totalshake.dtoRequest.PedidoRequest;
 import br.com.desafio.totalshake.model.Pedido;
 import br.com.desafio.totalshake.repository.PedidoRepository;
 import br.com.desafio.totalshake.service.exeception.DataBaseExeception;
@@ -22,26 +22,26 @@ public class PedidoService {
 
 
     @Transactional
-    public PedidoDto findById(Long id) {
+    public PedidoDtoResponse findById(Long id) {
         Optional<Pedido> obj = repository.findById(id);
         Pedido entity = obj.orElseThrow(() -> new ResourceNotFoundExeception("Entity not found"));
-        return new PedidoDto(entity);
+        return new PedidoDtoResponse(entity);
     }
 
     @Transactional
-    public PedidoDto insert(PedidoDto dto) {
+    public PedidoDtoResponse insert(PedidoDtoResponse dto) {
         Pedido entity = new Pedido();
         entity = repository.save(Pedido.convert(dto));
-        return new PedidoDto(entity);
+        return new PedidoDtoResponse(entity);
     }
 
     @Transactional
-    public PedidoDto update(Long id, AtualizacaoPedidoForm form) {
+    public PedidoDtoResponse update(Long id, PedidoRequest form) {
         try {
             Optional<Pedido> optional = repository.findById(id);
             if (optional.isPresent()) {
                 Pedido pedido = form.atualizar(id, repository);
-                return new PedidoDto(pedido);
+                return new PedidoDtoResponse(pedido);
             }
 
         } catch (EntityNotFoundException e) {

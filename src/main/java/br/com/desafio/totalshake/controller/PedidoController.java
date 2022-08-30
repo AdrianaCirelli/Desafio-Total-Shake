@@ -1,8 +1,8 @@
 package br.com.desafio.totalshake.controller;
 
 
-import br.com.desafio.totalshake.dto.PedidoDto;
-import br.com.desafio.totalshake.form.AtualizacaoPedidoForm;
+import br.com.desafio.totalshake.dtoResponse.PedidoDtoResponse;
+import br.com.desafio.totalshake.dtoRequest.PedidoRequest;
 import br.com.desafio.totalshake.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,12 +23,12 @@ public class PedidoController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<PedidoDto> findById (@PathVariable Long id) {
-       PedidoDto dto = service.findById(id);
+    public ResponseEntity<PedidoDtoResponse> findById (@PathVariable Long id) {
+       PedidoDtoResponse dto = service.findById(id);
         return ResponseEntity.ok().body(dto);
     }
     @PostMapping
-    public ResponseEntity<PedidoDto> insert ( @RequestBody PedidoDto dto){
+    public ResponseEntity<PedidoDtoResponse> insert (@RequestBody PedidoDtoResponse dto){
         dto = service.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(dto.getId()).toUri();
@@ -36,12 +36,12 @@ public class PedidoController {
     }
 
     @PutMapping(value = "/{id}")
-    public PedidoDto update(@PathVariable Long id, @RequestBody AtualizacaoPedidoForm form){
+    public PedidoDtoResponse update(@PathVariable Long id, @RequestBody PedidoRequest form){
 
         return service.update(id, form);
     }
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<PedidoDto> delete( @PathVariable Long id){
+    public ResponseEntity<PedidoDtoResponse> delete(@PathVariable Long id){
         service.delete(id);
 
         return ResponseEntity.noContent().build(); //204 - corpo da resp vazio

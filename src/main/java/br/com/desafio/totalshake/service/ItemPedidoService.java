@@ -1,7 +1,6 @@
 package br.com.desafio.totalshake.service;
 
-import br.com.desafio.totalshake.dto.ItemPedidoDto;
-import br.com.desafio.totalshake.dto.PedidoDto;
+import br.com.desafio.totalshake.dtoResponse.ItemPedidoDtoResponse;
 import br.com.desafio.totalshake.model.ItemPedido;
 
 import br.com.desafio.totalshake.repository.ItemPedidoRepository;
@@ -25,26 +24,23 @@ public class ItemPedidoService {
 
 
     @Transactional
-    public ItemPedidoDto findById(Long id) {
+    public ItemPedidoDtoResponse findById(Long id) {
         Optional<ItemPedido> obj = repository.findById(id);
         ItemPedido entity = obj.orElseThrow(() -> new ResourceNotFoundExeception("Entity not found"));
-        return new ItemPedidoDto(entity);
+        return new ItemPedidoDtoResponse(entity);
     }
 
     @Transactional
-    public ItemPedidoDto insert(ItemPedidoDto dto) {
-        ItemPedido entity = new ItemPedido();
-        entity = repository.save(entity);
-
-        return new ItemPedidoDto(entity);
+    public ItemPedido insert (ItemPedido itemPedido) {
+        return repository.save(itemPedido);
     }
 
     @Transactional
-    public ItemPedidoDto update(Long id, ItemPedidoDto dto) {
+    public ItemPedidoDtoResponse update(Long id, ItemPedidoDtoResponse dto) {
         try {
             ItemPedido entity = repository.getOne(id);
             entity = repository.save(entity);
-            return new ItemPedidoDto(entity);
+            return new ItemPedidoDtoResponse(entity);
 
         } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundExeception("id not found" + id);

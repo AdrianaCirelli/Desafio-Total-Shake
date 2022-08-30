@@ -1,5 +1,6 @@
 package br.com.desafio.totalshake.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class ItemPedido {
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "pedido_id")
     private Pedido pedido;
 
@@ -22,6 +24,14 @@ public class ItemPedido {
     @Deprecated
     public ItemPedido() {
     }
+
+
+    public ItemPedido(Integer quantidade, String descricao, Pedido value) {
+        this.quantidade = quantidade;
+        this.descricao = descricao;
+        this.pedido = value;
+    }
+
 
 
 }

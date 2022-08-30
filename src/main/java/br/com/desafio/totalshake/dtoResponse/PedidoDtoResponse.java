@@ -1,4 +1,4 @@
-package br.com.desafio.totalshake.dto;
+package br.com.desafio.totalshake.dtoResponse;
 
 
 import br.com.desafio.totalshake.model.Pedido;
@@ -9,13 +9,12 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PedidoDto {
+public class PedidoDtoResponse {
 
     private Long id;
     @NotBlank
@@ -26,7 +25,7 @@ public class PedidoDto {
     public void PedidoDto(){
 
     }
-    public PedidoDto (Pedido entity) {
+    public PedidoDtoResponse(Pedido entity) {
         this.id = entity.getId();
         this.dataHora= entity.getDataHora();
         this.status = entity.getStatus();
