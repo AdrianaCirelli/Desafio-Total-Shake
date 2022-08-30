@@ -7,15 +7,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Data
 @AllArgsConstructor
 public class ItemPedidoDtoResponse {
     private Pedido pedido;
     private Long id;
-    @NotBlank
+    @NotNull
     private Integer quantidade;
-    @NotBlank
+    @NotNull
     private String descricao;
 
      public ItemPedidoDtoResponse(){

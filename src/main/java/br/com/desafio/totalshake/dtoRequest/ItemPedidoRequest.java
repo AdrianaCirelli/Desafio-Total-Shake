@@ -6,14 +6,15 @@ import br.com.desafio.totalshake.repository.PedidoRepository;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Optional;
 
 @Data
 public class ItemPedidoRequest {
 
-    @NotBlank
+   @NotNull
     private Integer quantidade;
-    @NotBlank
+    @NotNull
     private String descricao;
     private Long pedido_id;
 
