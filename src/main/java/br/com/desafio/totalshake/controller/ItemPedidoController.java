@@ -1,8 +1,6 @@
 package br.com.desafio.totalshake.controller;
 
 import br.com.desafio.totalshake.dto.ItemPedidoDto;
-import br.com.desafio.totalshake.dto.PedidoDto;
-import br.com.desafio.totalshake.model.ItemPedido;
 import br.com.desafio.totalshake.service.ItemPedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

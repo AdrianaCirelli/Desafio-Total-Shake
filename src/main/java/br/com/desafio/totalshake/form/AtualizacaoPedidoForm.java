@@ -17,13 +17,15 @@ public class AtualizacaoPedidoForm {
     private  String status;
 
     public Pedido atualizar (Long id, PedidoRepository pedidoRepository) {
+        Status statusEnum = Status.valueOf(status);
         Pedido pedido = pedidoRepository.getReferenceById(id);
-        pedido.setStatus(buscaEnum(status));
+        pedido.setStatus(statusEnum);
 
         return pedido;
     }
 
-    public Status buscaEnum(String status) {
+
+  /*  public Status buscaEnum(String status) {
 
         if (status.equals("REALIZADO")) {
             return Status.REALIZADO;
@@ -62,6 +64,6 @@ public class AtualizacaoPedidoForm {
         } else {
             throw new IllegalArgumentException("Status nao existe");
         }
-    }
+    }*/
 }
 
