@@ -2,9 +2,10 @@ package br.com.desafio.totalshake.model;
 
 
 import br.com.desafio.totalshake.dto.PedidoDto;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
 @Entity
 @Table(name = "tb_pedido")
 @Data
+@AllArgsConstructor
 public class Pedido {
 
     @Id

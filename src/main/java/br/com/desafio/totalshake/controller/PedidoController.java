@@ -2,6 +2,7 @@ package br.com.desafio.totalshake.controller;
 
 
 import br.com.desafio.totalshake.dto.PedidoDto;
+import br.com.desafio.totalshake.form.AtualizacaoPedidoForm;
 import br.com.desafio.totalshake.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -35,10 +36,9 @@ public class PedidoController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<PedidoDto> update( @PathVariable Long id, @RequestBody PedidoDto dto){
-        dto = service.update(id, dto);
+    public PedidoDto update(@PathVariable Long id, @RequestBody AtualizacaoPedidoForm form){
 
-        return ResponseEntity.ok().body(dto);
+        return service.update(id, form);
     }
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<PedidoDto> delete( @PathVariable Long id){

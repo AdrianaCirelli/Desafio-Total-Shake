@@ -1,6 +1,7 @@
 package br.com.desafio.totalshake.service;
 
 import br.com.desafio.totalshake.dto.PedidoDto;
+import br.com.desafio.totalshake.form.AtualizacaoPedidoForm;
 import br.com.desafio.totalshake.model.Pedido;
 import br.com.desafio.totalshake.repository.PedidoRepository;
 import br.com.desafio.totalshake.service.exeception.DataBaseExeception;
@@ -9,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
-
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.Optional;
@@ -37,16 +37,19 @@ public class PedidoService {
     }
 
     @Transactional
-    public PedidoDto update(Long id, PedidoDto dto) {
+    public PedidoDto update(Long id, AtualizacaoPedidoForm form) {
         try {
-            Pedido entity = repository.getOne(id); //findByID efetiva no banco de dados e o getOne nao toca no banco...instancia um objeto provisorio
-            entity = repository.save(entity);
-            return new PedidoDto(entity);
+            Optional<Pedido> optional = repository.findById(id);
+            if (optional.isPresent()) {
+                Pedido pedido = form.atualizar(id, repository);
+                return new PedidoDto(pedido);
+            }
 
         } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundExeception("id not found" + id);
         }
 
+        return null;
     }
 
     public void delete(Long id) {
