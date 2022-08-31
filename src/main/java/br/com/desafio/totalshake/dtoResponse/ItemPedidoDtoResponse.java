@@ -12,8 +12,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @AllArgsConstructor
 public class ItemPedidoDtoResponse {
-    private Pedido pedido;
-    private Long id;
+
     @NotNull
     private Integer quantidade;
     @NotNull
@@ -23,8 +22,6 @@ public class ItemPedidoDtoResponse {
 
      }
     public ItemPedidoDtoResponse(ItemPedido entity) {
-        this.pedido = entity.getPedido();
-        this.id = entity.getId();
         this.quantidade = entity.getQuantidade();
         this.descricao = entity.getDescricao();
 

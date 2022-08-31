@@ -1,5 +1,6 @@
 package br.com.desafio.totalshake.controller;
 
+import br.com.desafio.totalshake.dtoRequest.AtualizaItemPedidoRequest;
 import br.com.desafio.totalshake.dtoResponse.ItemPedidoDtoResponse;
 import br.com.desafio.totalshake.dtoRequest.ItemPedidoRequest;
 import br.com.desafio.totalshake.model.ItemPedido;
@@ -34,10 +35,9 @@ public class ItemPedidoController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<ItemPedidoDtoResponse> update(@PathVariable Long id, @RequestBody ItemPedidoDtoResponse dto){
-        dto = service.update(id, dto);
+    public ResponseEntity<ItemPedidoDtoResponse> update(@PathVariable Long id, @RequestBody AtualizaItemPedidoRequest dto){
 
-        return ResponseEntity.ok().body(dto);
+        return service.update(id, dto);
     }
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<ItemPedidoDtoResponse> delete(@PathVariable Long id){

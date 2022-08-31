@@ -1,5 +1,7 @@
 package br.com.desafio.totalshake.service;
 
+import br.com.desafio.totalshake.dtoRequest.AtualizaItemPedidoRequest;
+import br.com.desafio.totalshake.dtoRequest.ItemPedidoRequest;
 import br.com.desafio.totalshake.dtoResponse.ItemPedidoDtoResponse;
 import br.com.desafio.totalshake.model.ItemPedido;
 
@@ -10,6 +12,7 @@ import br.com.desafio.totalshake.service.exeception.ResourceNotFoundExeception;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -36,15 +39,14 @@ public class ItemPedidoService {
     }
 
     @Transactional
-    public ItemPedidoDtoResponse update(Long id, ItemPedidoDtoResponse dto) {
-        try {
-            ItemPedido entity = repository.getOne(id);
-            entity = repository.save(entity);
-            return new ItemPedidoDtoResponse(entity);
+    public ResponseEntity<ItemPedidoDtoResponse> update(Long id, AtualizaItemPedidoRequest dto) {
 
-        } catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundExeception("id not found" + id);
+        Optional<ItemPedido> obj = repository.findById(id);
+        if(obj.isPresent()){
+            ItemPedido itemPedido = dto.atualizar(id, repository);
+            return ResponseEntity.ok(new ItemPedidoDtoResponse(itemPedido));
         }
+        return ResponseEntity.notFound().build();
 
     }
 

@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class PedidoDtoResponse {
 
-    private Long id;
+ //Response é oque vamos mandar para o usuario - Resposta
     @NotBlank
     private LocalDateTime dataHora;
     @NotBlank
@@ -26,7 +26,6 @@ public class PedidoDtoResponse {
 
     }
     public PedidoDtoResponse(Pedido entity) {
-        this.id = entity.getId();
         this.dataHora= entity.getDataHora();
         this.status = entity.getStatus();
     }
