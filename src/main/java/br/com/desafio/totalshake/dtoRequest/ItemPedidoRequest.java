@@ -8,6 +8,7 @@ import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Optional;
 
 @Data
@@ -16,6 +17,7 @@ public class ItemPedidoRequest {
    @NotNull
     private Integer quantidade;
     @NotNull
+    @Size(min =3 )//ver regra completa )
     private String descricao;
     private Long pedido_id;
 

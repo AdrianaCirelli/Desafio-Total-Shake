@@ -29,20 +29,20 @@ public class PedidoController {
     }
     @GetMapping(value = "/{id}")
     public ResponseEntity<PedidoDtoResponse> findById (@PathVariable Long id) {
-       PedidoDtoResponse dto = service.findById(id);
+        PedidoDtoResponse dto = service.findById(id);
         return ResponseEntity.ok().body(dto);
     }
     @PostMapping
     public ResponseEntity<PedidoDtoResponse> insert (@RequestBody PedidoDtoResponse dto){
         dto = service.insert(dto);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(dto.getId()).toUri();
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").
+                buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(dto);
     }
 
     @PutMapping(value = "/{id}")
     public PedidoDtoResponse update(@PathVariable Long id, @RequestBody PedidoRequest form){
-
+//cleand code - arrumar nomemclatura
         return service.update(id, form);
     }
     @DeleteMapping(value = "/{id}")
@@ -52,6 +52,3 @@ public class PedidoController {
         return ResponseEntity.noContent().build(); //204 - corpo da resp vazio
     }
 }
-
-
-

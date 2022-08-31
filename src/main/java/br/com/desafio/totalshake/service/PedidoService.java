@@ -33,13 +33,16 @@ public class PedidoService {
 
     @Transactional
     public PedidoDtoResponse insert(PedidoDtoResponse dto) {
-        Pedido entity = new Pedido();
+        Pedido entity = new Pedido(); //colocar na mesma linha
         entity = repository.save(Pedido.convert(dto));
         return new PedidoDtoResponse(entity);
     }
-
-    @Transactional
+ //update e delete sempre chamar o findById pra conferir no banco
+    //pode diferenciar o metodo do service e do repository ex getById
+    @Transactional  //JPA já cuida da transação
     public PedidoDtoResponse update(Long id, PedidoRequest form) {
+        //objeto como mesmo id salva atualizado já
+        //respository.save(objAtualizado) pode usar save pro update se passa o id entende como up date
         try {
             Optional<Pedido> optional = repository.findById(id);
             if (optional.isPresent()) {
@@ -55,6 +58,8 @@ public class PedidoService {
     }
 
     public void delete(Long id) {
+        //chamar o findByid , se nao encontrar ja cai na execessão
+        //throwException
         try {
             repository.deleteById(id);
 
