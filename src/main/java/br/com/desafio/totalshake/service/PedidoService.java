@@ -4,6 +4,7 @@ import br.com.desafio.totalshake.dtoResponse.PedidoDtoResponse;
 import br.com.desafio.totalshake.dtoRequest.PedidoRequest;
 import br.com.desafio.totalshake.model.ItemPedido;
 import br.com.desafio.totalshake.model.Pedido;
+import br.com.desafio.totalshake.model.Status;
 import br.com.desafio.totalshake.repository.PedidoRepository;
 import br.com.desafio.totalshake.service.exeception.DataBaseExeception;
 import br.com.desafio.totalshake.service.exeception.ResourceNotFoundExeception;
@@ -41,14 +42,11 @@ public class PedidoService {
     //pode diferenciar o metodo do service e do repository ex getById
     @Transactional  //JPA já cuida da transação
     public PedidoDtoResponse update(Long id, PedidoRequest form) {
-        //objeto como mesmo id salva atualizado já
-        //respository.save(objAtualizado) pode usar save pro update se passa o id entende como up date
         try {
-            Optional<Pedido> optional = repository.findById(id);
-            if (optional.isPresent()) {
-                Pedido pedido = form.atualizar(id, repository);
-                return new PedidoDtoResponse(pedido);
-            }
+            Pedido pedido = repository.findById(id).orElseThrow(() -> new ResourceNotFoundExeception("Id Not Found"));
+            pedido.setStatus(Status.valueOf(form.getStatus()));
+
+            repository.save(pedido);
 
         } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundExeception("id not found" + id);

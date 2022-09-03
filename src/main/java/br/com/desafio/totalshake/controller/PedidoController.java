@@ -4,6 +4,7 @@ package br.com.desafio.totalshake.controller;
 import br.com.desafio.totalshake.dtoResponse.PedidoDtoResponse;
 import br.com.desafio.totalshake.dtoRequest.PedidoRequest;
 import br.com.desafio.totalshake.model.Pedido;
+import br.com.desafio.totalshake.model.Status;
 import br.com.desafio.totalshake.repository.PedidoRepository;
 import br.com.desafio.totalshake.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ public class PedidoController {
 
     @Autowired
     private PedidoRepository repository;
+
+
 
     @GetMapping
     public ResponseEntity<List<Pedido>> finAll(){
@@ -42,9 +45,9 @@ public class PedidoController {
 
     @PutMapping(value = "/{id}")
     public PedidoDtoResponse update(@PathVariable Long id, @RequestBody PedidoRequest form){
-//cleand code - arrumar nomemclatura
         return service.update(id, form);
     }
+
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<PedidoDtoResponse> delete(@PathVariable Long id){
         service.delete(id);

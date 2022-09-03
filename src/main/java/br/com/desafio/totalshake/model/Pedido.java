@@ -3,6 +3,7 @@ package br.com.desafio.totalshake.model;
 
 import br.com.desafio.totalshake.dtoResponse.PedidoDtoResponse;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -13,6 +14,7 @@ import java.util.List;
 @Table(name = "tb_pedido")
 @Data
 @AllArgsConstructor
+@Builder
 public class Pedido {
 
     @Id
