@@ -38,13 +38,12 @@ public class PedidoService {
         entity = repository.save(Pedido.convert(dto));
         return new PedidoDtoResponse(entity);
     }
- //update e delete sempre chamar o findById pra conferir no banco
-    //pode diferenciar o metodo do service e do repository ex getById
+
     @Transactional  //JPA já cuida da transação
-    public PedidoDtoResponse update(Long id, PedidoRequest form) {
+    public PedidoDtoResponse update(Long id, PedidoRequest pedidoRequest) {
         try {
             Pedido pedido = repository.findById(id).orElseThrow(() -> new ResourceNotFoundExeception("Id Not Found"));
-            pedido.setStatus(Status.valueOf(form.getStatus()));
+            pedido.setStatus(Status.valueOf(pedidoRequest.getStatus()));
 
             repository.save(pedido);
 
@@ -56,8 +55,7 @@ public class PedidoService {
     }
 
     public void delete(Long id) {
-        //chamar o findByid , se nao encontrar ja cai na execessão
-        //throwException
+
         try {
             repository.deleteById(id);
 
