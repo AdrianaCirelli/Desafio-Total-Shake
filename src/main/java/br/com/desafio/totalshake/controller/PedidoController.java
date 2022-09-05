@@ -4,7 +4,6 @@ package br.com.desafio.totalshake.controller;
 import br.com.desafio.totalshake.dtoResponse.PedidoDtoResponse;
 import br.com.desafio.totalshake.dtoRequest.PedidoRequest;
 import br.com.desafio.totalshake.model.Pedido;
-import br.com.desafio.totalshake.model.Status;
 import br.com.desafio.totalshake.repository.PedidoRepository;
 import br.com.desafio.totalshake.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
